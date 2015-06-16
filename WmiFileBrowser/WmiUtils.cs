@@ -5,7 +5,7 @@ namespace WmiFileBrowser
 {
     static class WmiUtils
     {
-        public static ConnectionOptions CreateConnectionOptions(string login, SecureString password)
+        static ConnectionOptions CreateConnectionOptions(string login, SecureString password)
         {
             return new ConnectionOptions
             {
@@ -18,7 +18,7 @@ namespace WmiFileBrowser
             };
         }
 
-        public static ManagementScope CreateScope(string address, string wmiNamespace, ConnectionOptions options)
+        static ManagementScope CreateScope(string address, string wmiNamespace, ConnectionOptions options)
         {
             return
                 new ManagementScope(
@@ -29,8 +29,21 @@ namespace WmiFileBrowser
                     }, options);
         }
 
-        public static ManagementScope GetConnectedScope(string address, string wmiNamespace, string login,
-            SecureString password)
+        static EnumerationOptions GetEnumerationOptions(int blockSize)
+        {
+            return new EnumerationOptions
+            {
+                BlockSize = blockSize,
+                DirectRead = true,
+                EnsureLocatable = true,
+                EnumerateDeep = false,
+                ReturnImmediately = false,
+                Rewindable = false
+            };
+        }
+
+        public static ManagementScope GetConnectedScope(string address, string wmiNamespace, string login = null,
+            SecureString password = null)
         {
             var scope = CreateScope(address, wmiNamespace, CreateConnectionOptions(login, password));
             try
@@ -53,6 +66,17 @@ namespace WmiFileBrowser
                 }
             }
             return scope;
+        }
+
+        public static ManagementObjectCollection GetWmiQuery(ManagementScope scope, string className,
+            string condition = null, string[] properties = null, int blockSize = 100)
+        {
+            using (
+                var searcher = new ManagementObjectSearcher(scope, new SelectQuery(className, condition, properties),
+                    GetEnumerationOptions(blockSize)))
+            {
+                return searcher.Get();
+            }
         }
     }
 }
