@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Management;
 using WmiFileBrowser.Interfaces;
 
@@ -10,13 +9,13 @@ namespace WmiFileBrowser.Implementations
         private readonly string[] _propertyNames;
         private readonly object[] _propertyValues;
 
-        public WmiObject(string[] propertyNames)
+        public WmiObject(string[] sortedPropertyNames)
         {
-            _propertyNames = propertyNames;
+            _propertyNames = sortedPropertyNames;
             _propertyValues = new object[_propertyNames.Length];
         }
 
-        public IEnumerable<string> PropertyNames
+        public string[] PropertyNames
         {
             get { return _propertyNames; }
         }

@@ -1,4 +1,6 @@
-﻿using System.Management;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Management;
 using System.Security;
 
 namespace WmiFileBrowser
@@ -68,14 +70,14 @@ namespace WmiFileBrowser
             return scope;
         }
 
-        public static ManagementObjectCollection GetWmiQuery(ManagementScope scope, string className,
+        public static IEnumerable<ManagementObject> GetWmiQuery(ManagementScope scope, string className,
             string condition = null, string[] properties = null, int blockSize = 100)
         {
             using (
                 var searcher = new ManagementObjectSearcher(scope, new SelectQuery(className, condition, properties),
                     GetEnumerationOptions(blockSize)))
             {
-                return searcher.Get();
+                return searcher.Get().Cast<ManagementObject>();
             }
         }
     }

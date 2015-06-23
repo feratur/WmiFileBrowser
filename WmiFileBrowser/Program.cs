@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace WmiFileBrowser
         {
             try
             {
+                var g = WmiUtils.GetConnectedScope("localhost", @"root\cimv2");
+
+                var drives = FileUtils.Browse(g, ObjectInfoProvider.ObjectInfo, new FilePath());
+                var dirs = FileUtils.Browse(g, ObjectInfoProvider.ObjectInfo,
+                    new FilePath() {DriveLetter = 'd', PathNodes = new string[0]});
                 var ffds = new int[] {1, 2, 3}.AsEnumerable();
                 var dsa = (int[]) ffds;
                 var jdahg = new KeyValuePair<PropertyType, object>[2];
@@ -27,9 +33,8 @@ namespace WmiFileBrowser
                 {
                     while (!reader.EndOfStream)
                     {
-                        var line = reader.ReadLine();
-                        var ind = line.IndexOf('"') + 1;
-                        li.Add(line.Substring(ind, line.LastIndexOf('"') - ind));
+                        var line = reader.ReadLine().Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries)[1];
+                        li.Add(line.Substring(0, line.Length - 1));
                     }
                 }
                 using (var stream = new FileStream("d:\\test2.txt", FileMode.Create))
@@ -43,7 +48,6 @@ namespace WmiFileBrowser
                 
                 
                 var path = new FilePath();
-                var g = WmiUtils.GetConnectedScope("localhost", @"root\cimv2");
                 var str = new List<string>();
                 var og = new object();
                 foreach (var obj in WmiUtils.GetWmiQuery(g, "win32_computersystem").Cast<ManagementObject>())

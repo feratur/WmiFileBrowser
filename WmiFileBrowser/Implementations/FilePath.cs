@@ -7,7 +7,9 @@ using WmiFileBrowser.Interfaces;
 
 namespace WmiFileBrowser.Implementations
 {
-    class FilePath
+    class FilePath : IFilePath
     {
+        public char DriveLetter { get; set; }
+        public IEnumerable<string> PathNodes { get; set; }
     }
 }

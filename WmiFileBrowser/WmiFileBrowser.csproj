@@ -43,10 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliary\ObjectInfoContainer.cs" />
+    <Compile Include="Auxiliary\ObjectInfoProvider.cs" />
     <Compile Include="Auxiliary\ObjectType.cs" />
     <Compile Include="Auxiliary\PropertyType.cs" />
+    <Compile Include="FileUtils.cs" />
     <Compile Include="Implementations\FilePath.cs" />
-    <Compile Include="Implementations\WmiFile.cs" />
+    <Compile Include="Implementations\FileSystemObject.cs" />
     <Compile Include="Implementations\WmiObject.cs" />
     <Compile Include="Interfaces\IFileDescriptor.cs" />
     <Compile Include="Interfaces\IFilePath.cs" />
