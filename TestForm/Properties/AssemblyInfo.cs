@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WmiFileBrowser")]
+[assembly: AssemblyTitle("TestForm")]
 [assembly: AssemblyDescription("https://github.com/feratur/WmiFileBrowser")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("https://github.com/feratur")]
-[assembly: AssemblyProduct("WmiFileBrowser")]
+[assembly: AssemblyProduct("TestForm")]
 [assembly: AssemblyCopyright("Copyright © Alexey Burlakov 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d8761ab9-dcd9-4f28-a50b-bdd6d8eb55a2")]
+[assembly: Guid("36a39fac-78ae-417a-bed4-d8e6a8dc6d5c")]
 
 // Version information for an assembly consists of the following four values:
 //

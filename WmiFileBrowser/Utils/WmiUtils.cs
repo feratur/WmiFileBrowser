@@ -3,11 +3,11 @@ using System.Linq;
 using System.Management;
 using System.Security;
 
-namespace WmiFileBrowser
+namespace WmiFileBrowser.Utils
 {
     static class WmiUtils
     {
-        static ConnectionOptions CreateConnectionOptions(string login, SecureString password)
+        private static ConnectionOptions CreateConnectionOptions(string login, SecureString password)
         {
             return new ConnectionOptions
             {
@@ -15,12 +15,12 @@ namespace WmiFileBrowser
                 EnablePrivileges = true,
                 Impersonation = ImpersonationLevel.Impersonate,
                 Locale = "MS_409",
-                SecurePassword = password != null ? password.Copy() : null,
+                SecurePassword = password,
                 Username = login
             };
         }
 
-        static ManagementScope CreateScope(string address, string wmiNamespace, ConnectionOptions options)
+        private static ManagementScope CreateScope(string address, string wmiNamespace, ConnectionOptions options)
         {
             return
                 new ManagementScope(
@@ -31,7 +31,7 @@ namespace WmiFileBrowser
                     }, options);
         }
 
-        static EnumerationOptions GetEnumerationOptions(int blockSize)
+        private static EnumerationOptions GetEnumerationOptions(int blockSize)
         {
             return new EnumerationOptions
             {
@@ -48,6 +48,19 @@ namespace WmiFileBrowser
             SecureString password = null)
         {
             var scope = CreateScope(address, wmiNamespace, CreateConnectionOptions(login, password));
+            ConnectScope(scope);
+            return scope;
+        }
+
+        public static void DisconnectScope(ManagementScope scope)
+        {
+            var server = scope.Path.Server;
+            scope.Path.Server = string.Empty;
+            scope.Path.Server = server;
+        }
+        
+        public static void ConnectScope(ManagementScope scope)
+        {
             try
             {
                 scope.Connect();
@@ -58,16 +71,15 @@ namespace WmiFileBrowser
                 {
                     case ManagementStatus.LocalCredentials:
                         scope =
-                            new ManagementScope(string.IsNullOrEmpty(address)
-                                ? wmiNamespace
-                                : @"\\" + address + @"\" + wmiNamespace);
+                            new ManagementScope(string.IsNullOrEmpty(scope.Path.Server)
+                                ? scope.Path.NamespacePath
+                                : @"\\" + scope.Path.Server + @"\" + scope.Path.NamespacePath);
                         scope.Connect();
                         break;
                     default:
                         throw;
                 }
             }
-            return scope;
         }
 
         public static IEnumerable<ManagementObject> GetWmiQuery(ManagementScope scope, string className,
@@ -79,6 +91,12 @@ namespace WmiFileBrowser
             {
                 return searcher.Get().Cast<ManagementObject>();
             }
+        }
+
+        public static ManagementObject GetFirstOrDefaultWmiObject(ManagementScope scope, string className,
+            string condition = null, string[] properties = null)
+        {
+            return GetWmiQuery(scope, className, condition, properties, 1).FirstOrDefault();
         }
     }
 }

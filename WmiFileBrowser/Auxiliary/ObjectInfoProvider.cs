@@ -4,7 +4,7 @@ namespace WmiFileBrowser.Auxiliary
 {
     static class ObjectInfoProvider
     {
-        public static readonly Dictionary<ObjectType, ObjectInfoContainer> ObjectInfo =
+        public static readonly Dictionary<ObjectType, ObjectInfoContainer> FullObjectInfo =
             new Dictionary<ObjectType, ObjectInfoContainer>
             {
                 {
@@ -88,6 +88,7 @@ namespace WmiFileBrowser.Auxiliary
                         "Automount",
                         "Availability",
                         "BlockSize",
+                        "BootVolume",
                         "Capacity",
                         "Caption",
                         "Compressed",
@@ -111,6 +112,7 @@ namespace WmiFileBrowser.Auxiliary
                         "MaximumFileNameLength",
                         "Name",
                         "NumberOfBlocks",
+                        "PageFilePresent",
                         "PNPDeviceID",
                         "PowerManagementCapabilities",
                         "PowerManagementSupported",
@@ -118,13 +120,72 @@ namespace WmiFileBrowser.Auxiliary
                         "QuotasEnabled",
                         "QuotasIncomplete",
                         "QuotasRebuilding",
+                        "SerialNumber",
                         "Status",
                         "StatusInfo",
+                        "SupportsDiskQuotas",
+                        "SupportsFileBasedCompression",
                         "SystemCreationClassName",
                         "SystemName",
-                        "SerialNumber",
-                        "SupportsDiskQuotas",
-                        "SupportsFileBasedCompression"
+                        "SystemVolume"
+                    })
+                }
+            };
+
+        public static readonly Dictionary<ObjectType, ObjectInfoContainer> ShortObjectInfo =
+            new Dictionary<ObjectType, ObjectInfoContainer>
+            {
+                {
+                    ObjectType.File, new ObjectInfoContainer(ObjectType.File, "cim_datafile", new[]
+                    {
+                        "CreationDate",
+                        "Drive",
+                        "EightDotThreeFileName",
+                        "Extension",
+                        "FileName",
+                        "FileSize",
+                        "FileType",
+                        "Hidden",
+                        "LastAccessed",
+                        "LastModified",
+                        "Name",
+                        "Path",
+                        "Readable",
+                        "System",
+                        "Writeable"
+                    })
+                },
+                {
+                    ObjectType.Directory, new ObjectInfoContainer(ObjectType.Directory, "win32_directory", new[]
+                    {
+                        "CreationDate",
+                        "Drive",
+                        "EightDotThreeFileName",
+                        "FileName",
+                        "Hidden",
+                        "LastModified",
+                        "Name",
+                        "Path",
+                        "Readable",
+                        "System",
+                        "Writeable"
+                    })
+                },
+                {
+                    ObjectType.Drive, new ObjectInfoContainer(ObjectType.Drive, "win32_volume", new[]
+                    {
+                        "BlockSize",
+                        "BootVolume",
+                        "Capacity",
+                        "Compressed",
+                        "DeviceID",
+                        "DriveLetter",
+                        "DriveType",
+                        "FileSystem",
+                        "FreeSpace",
+                        "Label",
+                        "Name",
+                        "SerialNumber"
                     })
                 }
             };

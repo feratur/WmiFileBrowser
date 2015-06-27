@@ -1,16 +1,16 @@
 ﻿namespace WmiFileBrowser.Auxiliary
 {
-    public class ObjectInfoContainer
+    class ObjectInfoContainer
     {
         public readonly ObjectType Type;
         public readonly string ClassName;
         public readonly string[] Properties;
 
-        public ObjectInfoContainer(ObjectType type, string className, string[] properties)
+        public ObjectInfoContainer(ObjectType type, string className, string[] sortedProperties)
         {
             Type = type;
             ClassName = className;
-            Properties = properties;
+            Properties = sortedProperties;
         }
     }
 }

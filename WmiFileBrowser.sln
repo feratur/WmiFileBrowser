@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WmiFileBrowser", "WmiFileBrowser\WmiFileBrowser.csproj", "{5B87EB86-A9F8-4807-8CEC-78C1316BA602}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForm", "TestForm\TestForm.csproj", "{F6115229-0EEB-41E0-9F6D-0D6CCE4F7931}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5B87EB86-A9F8-4807-8CEC-78C1316BA602}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B87EB86-A9F8-4807-8CEC-78C1316BA602}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B87EB86-A9F8-4807-8CEC-78C1316BA602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6115229-0EEB-41E0-9F6D-0D6CCE4F7931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6115229-0EEB-41E0-9F6D-0D6CCE4F7931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6115229-0EEB-41E0-9F6D-0D6CCE4F7931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6115229-0EEB-41E0-9F6D-0D6CCE4F7931}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
