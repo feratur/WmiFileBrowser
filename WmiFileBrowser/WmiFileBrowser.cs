@@ -18,6 +18,32 @@ namespace WmiFileBrowser
         private readonly Stack<IFilePath> _currentHistory = new Stack<IFilePath>();
         private readonly Stack<IFilePath> _forwardHistory = new Stack<IFilePath>();
 
+        private void ClearHistory()
+        {
+            _currentHistory.Clear();
+            _forwardHistory.Clear();
+        }
+
+        private void GoToPathBase(IFilePath path)
+        {
+            if (!_currentHistory.Any() || _currentHistory.Peek().Equals(path))
+                return;
+
+            _currentHistory.Push(path);
+            _forwardHistory.Clear();
+        }
+
+        private void SetInitialPathBase(IFilePath path)
+        {
+            ClearHistory();
+            _currentHistory.Push(path);
+        }
+
+        private bool CheckIfObjectExistsBase(IFilePath path, bool isFile)
+        {
+            return IsInitialized && FileUtils.CheckIfObjectExists(_scope, path, isFile);
+        }
+
         /// <summary>
         /// If set to true the GetData() method will return all the properties of WMI objects.
         /// </summary>
@@ -105,12 +131,6 @@ namespace WmiFileBrowser
                 : null;
         }
 
-        private void ClearHistory()
-        {
-            _currentHistory.Clear();
-            _forwardHistory.Clear();
-        }
-
         /// <summary>
         /// A method that is used to initialize the browser and establish the connection to the host.
         /// </summary>
@@ -122,15 +142,6 @@ namespace WmiFileBrowser
             _scope = WmiUtils.GetConnectedScope(address, @"root\cimv2", login, password);
             ClearHistory();
             _currentHistory.Push(new FilePath());
-        }
-
-        private void GoToPathBase(IFilePath path)
-        {
-            if (!_currentHistory.Any() || _currentHistory.Peek().Equals(path))
-                return;
-
-            _currentHistory.Push(path);
-            _forwardHistory.Clear();
         }
 
         /// <summary>
@@ -151,12 +162,6 @@ namespace WmiFileBrowser
             GoToPathBase(FilePath.ParsePath(path));
         }
 
-        private void SetInitialPathBase(IFilePath path)
-        {
-            ClearHistory();
-            _currentHistory.Push(path);
-        }
-
         /// <summary>
         /// Clear browser history and set the path as the current directory.
         /// </summary>
@@ -173,6 +178,46 @@ namespace WmiFileBrowser
         public void SetInitialPath(string path)
         {
             SetInitialPathBase(FilePath.ParsePath(path));
+        }
+
+        /// <summary>
+        /// Returns whether a directory with the specified path exists.
+        /// </summary>
+        /// <param name="path">The IFilePath of the desired directory.</param>
+        /// <returns>True if directory exists.</returns>
+        public bool CheckIfDirectoryExists(IFilePath path)
+        {
+            return CheckIfObjectExistsBase(path, false);
+        }
+
+        /// <summary>
+        /// Returns whether a directory with the specified path exists.
+        /// </summary>
+        /// <param name="path">The path of the desired directory in a string format.</param>
+        /// <returns>True if directory exists.</returns>
+        public bool CheckIfDirectoryExists(string path)
+        {
+            return CheckIfDirectoryExists(FilePath.ParsePath(path));
+        }
+
+        /// <summary>
+        /// Returns whether a file with the specified path exists.
+        /// </summary>
+        /// <param name="path">The IFilePath of the desired file.</param>
+        /// <returns>True if file exists.</returns>
+        public bool CheckIfFileExists(IFilePath path)
+        {
+            return CheckIfObjectExistsBase(path, true);
+        }
+
+        /// <summary>
+        /// Returns whether a file with the specified path exists.
+        /// </summary>
+        /// <param name="path">The path of the desired file in a string format.</param>
+        /// <returns>True if file exists.</returns>
+        public bool CheckIfFileExists(string path)
+        {
+            return CheckIfFileExists(FilePath.ParsePath(path));
         }
 
         /// <summary>

@@ -2,13 +2,11 @@
 {
     class ObjectInfoContainer
     {
-        public readonly ObjectType Type;
-        public readonly string ClassName;
         public readonly string[] Properties;
+        public readonly string ClassName;
 
-        public ObjectInfoContainer(ObjectType type, string className, string[] sortedProperties)
+        public ObjectInfoContainer(string className, string[] sortedProperties)
         {
-            Type = type;
             ClassName = className;
             Properties = sortedProperties;
         }

@@ -9,6 +9,8 @@ namespace WmiFileBrowser.Implementations
         private readonly string[] _propertyNames;
         private readonly object[] _propertyValues;
 
+        public string WmiPath { get; private set; }
+
         public WmiObject(string[] sortedPropertyNames)
         {
             _propertyNames = sortedPropertyNames;
@@ -27,6 +29,8 @@ namespace WmiFileBrowser.Implementations
 
         public void PopulateProperties(ManagementObject wmiObject)
         {
+            WmiPath = wmiObject.Path.Path;
+            
             for (var i = 0; i < _propertyNames.Length; ++i)
             {
                 var property = wmiObject.Properties[_propertyNames[i]];

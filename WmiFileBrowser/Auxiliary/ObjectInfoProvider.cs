@@ -8,7 +8,7 @@ namespace WmiFileBrowser.Auxiliary
             new Dictionary<ObjectType, ObjectInfoContainer>
             {
                 {
-                    ObjectType.File, new ObjectInfoContainer(ObjectType.File, "cim_datafile", new[]
+                    ObjectType.File, new ObjectInfoContainer("cim_datafile", new[]
                     {
                         "AccessMask",
                         "Archive",
@@ -46,7 +46,7 @@ namespace WmiFileBrowser.Auxiliary
                     })
                 },
                 {
-                    ObjectType.Directory, new ObjectInfoContainer(ObjectType.Directory, "win32_directory", new[]
+                    ObjectType.Directory, new ObjectInfoContainer("win32_directory", new[]
                     {
                         "AccessMask",
                         "Archive",
@@ -82,7 +82,7 @@ namespace WmiFileBrowser.Auxiliary
                     })
                 },
                 {
-                    ObjectType.Drive, new ObjectInfoContainer(ObjectType.Drive, "win32_volume", new[]
+                    ObjectType.Drive, new ObjectInfoContainer("win32_volume", new[]
                     {
                         "Access",
                         "Automount",
@@ -136,7 +136,7 @@ namespace WmiFileBrowser.Auxiliary
             new Dictionary<ObjectType, ObjectInfoContainer>
             {
                 {
-                    ObjectType.File, new ObjectInfoContainer(ObjectType.File, "cim_datafile", new[]
+                    ObjectType.File, new ObjectInfoContainer("cim_datafile", new[]
                     {
                         "CreationDate",
                         "Drive",
@@ -156,7 +156,7 @@ namespace WmiFileBrowser.Auxiliary
                     })
                 },
                 {
-                    ObjectType.Directory, new ObjectInfoContainer(ObjectType.Directory, "win32_directory", new[]
+                    ObjectType.Directory, new ObjectInfoContainer("win32_directory", new[]
                     {
                         "CreationDate",
                         "Drive",
@@ -172,7 +172,7 @@ namespace WmiFileBrowser.Auxiliary
                     })
                 },
                 {
-                    ObjectType.Drive, new ObjectInfoContainer(ObjectType.Drive, "win32_volume", new[]
+                    ObjectType.Drive, new ObjectInfoContainer("win32_volume", new[]
                     {
                         "BlockSize",
                         "BootVolume",

@@ -32,10 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BrowserForm));
             this.listViewFiles = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imageListIcons = new System.Windows.Forms.ImageList(this.components);
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonForward = new System.Windows.Forms.Button();
-            this.imageListIcons = new System.Windows.Forms.ImageList(this.components);
             this.textBoxPath = new System.Windows.Forms.TextBox();
+            this.checkBoxFull = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // listViewFiles
@@ -50,7 +51,8 @@
             this.listViewFiles.Location = new System.Drawing.Point(12, 38);
             this.listViewFiles.MultiSelect = false;
             this.listViewFiles.Name = "listViewFiles";
-            this.listViewFiles.Size = new System.Drawing.Size(585, 171);
+            this.listViewFiles.ShowItemToolTips = true;
+            this.listViewFiles.Size = new System.Drawing.Size(585, 184);
             this.listViewFiles.SmallImageList = this.imageListIcons;
             this.listViewFiles.TabIndex = 0;
             this.listViewFiles.UseCompatibleStateImageBehavior = false;
@@ -63,6 +65,16 @@
             // 
             this.columnHeader1.Text = "Name";
             this.columnHeader1.Width = 300;
+            // 
+            // imageListIcons
+            // 
+            this.imageListIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListIcons.ImageStream")));
+            this.imageListIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListIcons.Images.SetKeyName(0, "drive.png");
+            this.imageListIcons.Images.SetKeyName(1, "help_folder.png");
+            this.imageListIcons.Images.SetKeyName(2, "iconFile.gif");
+            this.imageListIcons.Images.SetKeyName(3, "Back.png");
+            this.imageListIcons.Images.SetKeyName(4, "Forward.png");
             // 
             // buttonBack
             // 
@@ -86,16 +98,6 @@
             this.buttonForward.UseVisualStyleBackColor = true;
             this.buttonForward.Click += new System.EventHandler(this.buttonForward_Click);
             // 
-            // imageListIcons
-            // 
-            this.imageListIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListIcons.ImageStream")));
-            this.imageListIcons.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListIcons.Images.SetKeyName(0, "drive.png");
-            this.imageListIcons.Images.SetKeyName(1, "help_folder.png");
-            this.imageListIcons.Images.SetKeyName(2, "iconFile.gif");
-            this.imageListIcons.Images.SetKeyName(3, "Back.png");
-            this.imageListIcons.Images.SetKeyName(4, "Forward.png");
-            // 
             // textBoxPath
             // 
             this.textBoxPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -106,11 +108,24 @@
             this.textBoxPath.Size = new System.Drawing.Size(513, 20);
             this.textBoxPath.TabIndex = 3;
             // 
+            // checkBoxFull
+            // 
+            this.checkBoxFull.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxFull.AutoSize = true;
+            this.checkBoxFull.Location = new System.Drawing.Point(12, 228);
+            this.checkBoxFull.Name = "checkBoxFull";
+            this.checkBoxFull.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxFull.TabIndex = 4;
+            this.checkBoxFull.Text = "Get full info";
+            this.checkBoxFull.UseVisualStyleBackColor = true;
+            this.checkBoxFull.CheckedChanged += new System.EventHandler(this.checkBoxFull_CheckedChanged);
+            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 221);
+            this.ClientSize = new System.Drawing.Size(609, 253);
+            this.Controls.Add(this.checkBoxFull);
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.buttonForward);
             this.Controls.Add(this.buttonBack);
@@ -132,5 +147,6 @@
         private System.Windows.Forms.Button buttonForward;
         private System.Windows.Forms.ImageList imageListIcons;
         private System.Windows.Forms.TextBox textBoxPath;
+        private System.Windows.Forms.CheckBox checkBoxFull;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using WmiFileBrowser.Auxiliary;
 using WmiFileBrowser.Interfaces;
@@ -18,6 +19,7 @@ namespace TestForm
         private void LoadData()
         {
             listViewFiles.BeginUpdate();
+
             try
             {
                 buttonBack.Enabled = _browser.IsBackAvailable;
@@ -51,10 +53,14 @@ namespace TestForm
                             properties = new string[0];
                             break;
                     }
+                    var fileCopy = file;
                     listViewFiles.Items.Add(new ListViewItem(properties)
                     {
+                        ImageIndex = imageIndex,
                         Tag = file,
-                        ImageIndex = imageIndex
+                        ToolTipText =
+                            string.Join(Environment.NewLine,
+                                file.PropertyNames.Select(p => string.Format("{0}: {1}", p, fileCopy.GetPropertyValue(p))))
                     });
                 }
             }
@@ -123,6 +129,11 @@ namespace TestForm
                     buttonForward_Click(this, EventArgs.Empty);
                     break;
             }
+        }
+
+        private void checkBoxFull_CheckedChanged(object sender, EventArgs e)
+        {
+            _browser.ReturnFullInfo = checkBoxFull.Checked;
         }
     }
 }

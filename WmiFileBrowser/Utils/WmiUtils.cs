@@ -44,6 +44,17 @@ namespace WmiFileBrowser.Utils
             };
         }
 
+        private static ManagementObjectCollection GetManagementCollection(ManagementScope scope, string className,
+            string condition, string[] properties, int blockSize)
+        {
+            using (
+                var searcher = new ManagementObjectSearcher(scope, new SelectQuery(className, condition, properties),
+                    GetEnumerationOptions(blockSize)))
+            {
+                return searcher.Get();
+            }
+        }
+
         public static ManagementScope GetConnectedScope(string address, string wmiNamespace, string login = null,
             SecureString password = null)
         {
@@ -85,11 +96,12 @@ namespace WmiFileBrowser.Utils
         public static IEnumerable<ManagementObject> GetWmiQuery(ManagementScope scope, string className,
             string condition = null, string[] properties = null, int blockSize = 100)
         {
-            using (
-                var searcher = new ManagementObjectSearcher(scope, new SelectQuery(className, condition, properties),
-                    GetEnumerationOptions(blockSize)))
+            using (var collection = GetManagementCollection(scope, className, condition, properties, blockSize))
             {
-                return searcher.Get().Cast<ManagementObject>();
+                foreach (var obj in collection.Cast<ManagementObject>())
+                {
+                    yield return obj;
+                }
             }
         }
 
