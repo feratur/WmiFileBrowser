@@ -76,7 +76,7 @@ namespace WmiFileBrowser
         }
 
         /// <summary>
-        /// Returns the current path of the browser in string format.
+        /// The current path of the browser in a string format.
         /// </summary>
         public string CurrentPath
         {

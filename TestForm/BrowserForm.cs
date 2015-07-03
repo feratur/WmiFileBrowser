@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using WmiFileBrowser.Auxiliary;
@@ -16,8 +17,41 @@ namespace TestForm
             InitializeComponent();
         }
 
+        private List<IFileDescriptor> GetFileList()
+        {
+            var retry = false;
+            while (true)
+            {
+                try
+                {
+                    if (retry)
+                        _browser.Reconnect();
+
+                    return _browser.GetData();
+                }
+                catch (Exception ex)
+                {
+                    if (
+                        MessageBox.Show(
+                            ex.Message + Environment.NewLine + Environment.NewLine + @"Try to reconnect to the host?",
+                            @"Get data failed", MessageBoxButtons.YesNo, MessageBoxIcon.Error) != DialogResult.Yes)
+                        return null;
+
+                    retry = true;
+                }
+            }
+        }
+        
         private void LoadData()
         {
+            var files = GetFileList();
+            if (files == null)
+            {
+                DialogResult = DialogResult.Cancel;
+                Close();
+                return;
+            }
+            
             listViewFiles.BeginUpdate();
 
             try
@@ -26,7 +60,8 @@ namespace TestForm
                 buttonForward.Enabled = _browser.IsForwardAvailable;
                 textBoxPath.Text = _browser.CurrentPath;
                 listViewFiles.Items.Clear();
-                foreach (var file in _browser.GetData())
+
+                foreach (var file in files)
                 {
                     string[] properties;
                     var imageIndex = 0;
@@ -83,6 +118,7 @@ namespace TestForm
             var selected = (IFileDescriptor) listViewFiles.SelectedItems[0].Tag;
             if (selected.Type == ObjectType.File)
                 return;
+
             _browser.GoToPath((string)selected.GetPropertyValue("Name"));
             LoadData();
         }
@@ -109,10 +145,10 @@ namespace TestForm
         {
             switch (e.KeyChar)
             {
-                case (char)Keys.Back:
+                case (char) Keys.Back:
                     buttonBack_Click(this, EventArgs.Empty);
                     break;
-                case (char)Keys.Enter:
+                case (char) Keys.Enter:
                     listViewFiles_DoubleClick(this, EventArgs.Empty);
                     break;
             }

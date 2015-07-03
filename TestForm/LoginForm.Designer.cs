@@ -31,14 +31,14 @@
             this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxLoginInfo = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.radioButtonLocal = new System.Windows.Forms.RadioButton();
             this.radioButtonRemote = new System.Windows.Forms.RadioButton();
             this.buttonConnect = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxLoginInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxAddress
@@ -63,21 +63,21 @@
             this.textBoxPassword.TabIndex = 6;
             this.textBoxPassword.UseSystemPasswordChar = true;
             // 
-            // groupBox1
+            // groupBoxLoginInfo
             // 
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBoxPassword);
-            this.groupBox1.Controls.Add(this.textBoxAddress);
-            this.groupBox1.Controls.Add(this.textBoxUsername);
-            this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(12, 72);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Login information";
+            this.groupBoxLoginInfo.Controls.Add(this.label3);
+            this.groupBoxLoginInfo.Controls.Add(this.label2);
+            this.groupBoxLoginInfo.Controls.Add(this.label1);
+            this.groupBoxLoginInfo.Controls.Add(this.textBoxPassword);
+            this.groupBoxLoginInfo.Controls.Add(this.textBoxAddress);
+            this.groupBoxLoginInfo.Controls.Add(this.textBoxUsername);
+            this.groupBoxLoginInfo.Enabled = false;
+            this.groupBoxLoginInfo.Location = new System.Drawing.Point(12, 72);
+            this.groupBoxLoginInfo.Name = "groupBoxLoginInfo";
+            this.groupBoxLoginInfo.Size = new System.Drawing.Size(200, 100);
+            this.groupBoxLoginInfo.TabIndex = 3;
+            this.groupBoxLoginInfo.TabStop = false;
+            this.groupBoxLoginInfo.Text = "Login information";
             // 
             // label3
             // 
@@ -149,13 +149,13 @@
             this.Controls.Add(this.buttonConnect);
             this.Controls.Add(this.radioButtonRemote);
             this.Controls.Add(this.radioButtonLocal);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxLoginInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxLoginInfo.ResumeLayout(false);
+            this.groupBoxLoginInfo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,7 +166,7 @@
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxLoginInfo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
