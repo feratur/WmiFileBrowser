@@ -27,4 +27,4 @@ After setting the path call **GetData** method to get a list of 'WmiFileBrowser.
  
 There is also a set of properties and methods provided by the **WmiFileBrowser** object, each of them has self-explanatory C# XML documentation comments.
  
-Please, inform me of any bugs you happen to encounter via email (shown on my profile page). Any feedback will be highly appreciated.
+***Please, inform me of any bugs you happen to encounter via email (shown on my profile page). Any feedback will be highly appreciated.***
