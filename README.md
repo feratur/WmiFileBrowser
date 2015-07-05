@@ -15,7 +15,7 @@ After setting the path call **GetData** method to get a list of 'WmiFileBrowser.
 
  > **PropertyNames** - an array of the names of the available properties of the object.
 
- > The method **'GetPropertyValue'** provided with the name of the property should be used to retrieve the value of the property.
+ > The method **GetPropertyValue** provided with the name of the property should be used to retrieve the value of the property.
 
 **WmiFileBrowser** object also has a number of settable properties:
 
