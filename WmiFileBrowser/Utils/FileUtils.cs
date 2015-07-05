@@ -31,14 +31,15 @@ namespace WmiFileBrowser.Utils
                 path.ToString().Replace(@"\", @"\\"));
         }
 
-        private static void PopulateList(ManagementScope scope, ObjectInfoContainer info, string condition,
-            ICollection<IFileDescriptor> list)
+        private static void PopulateList(ManagementScope scope, IDictionary<ObjectType, ObjectInfoContainer> objectInfo,
+            ObjectType type, string condition, ICollection<IFileDescriptor> list)
         {
+            var info = objectInfo[type];
             foreach (var wmiFile in WmiUtils.GetWmiQuery(scope, info.ClassName, condition, info.Properties))
             {
                 using (wmiFile)
                 {
-                    var file = new FileSystemObject(info);
+                    var file = new FileSystemObject(type, info.Properties);
                     file.PopulateProperties(wmiFile);
                     list.Add(file);
                 }
@@ -62,21 +63,16 @@ namespace WmiFileBrowser.Utils
             var result = new List<IFileDescriptor>();
 
             if (filePath.DriveLetter == default(char))
-            {
-                var driveInfo = objectInfo[ObjectType.Drive];
-                PopulateList(scope, driveInfo, null, result);
-            }
+                PopulateList(scope, objectInfo, ObjectType.Drive, null, result);
             else
             {
                 var path = GetPathSearchCondition(filePath);
 
-                var directoryInfo = objectInfo[ObjectType.Directory];
-                PopulateList(scope, directoryInfo, path, result);
+                PopulateList(scope, objectInfo, ObjectType.Directory, path, result);
 
                 if (getFiles)
                 {
-                    var fileInfo = objectInfo[ObjectType.File];
-                    PopulateList(scope, fileInfo,
+                    PopulateList(scope, objectInfo, ObjectType.File,
                         path +
                         (extensions != null && extensions.Any()
                             ? string.Format(" and ({0})",
