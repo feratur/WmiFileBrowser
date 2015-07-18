@@ -1,7 +1,7 @@
 # WmiFileBrowser
 A simple .NET library for accessing the filesystem on local or remote computer via WMI. Only requires access to WMI root\cimv2 namespace.
 
-*Minimal requirements: .NET 4.0 Client Profile.*
+*Minimal requirements: .NET Framework 4.0 Client Profile*
 
 A dynamic class library written in C# (WmiFileBrowser.dll) with a WinForms example of usage. To start using the library construct **WmiFileBrowser.WmiFileBrowser** object and call **ConnectToHost** method providing the address of the host with a valid username and password (if needed).
 
